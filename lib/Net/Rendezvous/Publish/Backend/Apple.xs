@@ -44,43 +44,6 @@ register_callback(
     LEAVE;
 }
 
-static 
-void 
-browse_reply(
-    DNSServiceBrowserReplyResultType resultType,
-    const char *replyName,
-    const char *replyType,
-    const char *replyDomain,
-    DNSServiceDiscoveryReplyFlags flags,
-    void *context)
-{
-    char *op = 
-	(resultType == DNSServiceBrowserReplyAddInstance) ? "add" : "remove";
-
-
-#if MY_DEBUG
-    printf( "context %x name %s type %s domain %s\n", 
-	    context, replyName, replyType, replyDomain );
-#endif
-
-
-    dSP;
-    ENTER;
-    SAVETMPS;
-    PUSHMARK(SP);
-
-    XPUSHs( (SV*) context);
-    XPUSHs(sv_2mortal(newSVpv(replyName, 0)));
-    XPUSHs(sv_2mortal(newSVpv(replyType, 0)));
-    XPUSHs(sv_2mortal(newSVpv(replyDomain, 0)));
-    XPUSHs(sv_2mortal(newSVpv(op, 0)));
-    XPUSHs(sv_2mortal(newSViv(flags == kDNSServiceDiscoveryMoreRepliesImmediately ? 1 : 0)));
-
-    PUTBACK;
-    call_method("_browse_callback", G_DISCARD);
-    FREETMPS;
-    LEAVE;
-}
 
 char *
 explain_mach (mach_msg_return_t code) {
@@ -122,7 +85,7 @@ explain_mach (mach_msg_return_t code) {
     }
 }
 
-MODULE = Net::ZeroConf::Backend::Rendezvous PACKAGE = Net::ZeroConf::Backend::Rendezvous
+MODULE = Net::Rendezvous::Publish::Backend::Apple PACKAGE = Net::Rendezvous::Publish::Backend::Apple
 
 dns_service_discovery_ref
 xs_publish( handle, name, type, domain, host, port, txt )
@@ -146,20 +109,6 @@ xs_stop( what )
 dns_service_discovery_ref what;
 CODE: 
     DNSServiceDiscoveryDeallocate( what );
-
-
-dns_service_discovery_ref
-xs_browse( handle, type, domain )
-SV* handle;
-char *type;
-char *domain;
-CODE:  
-RETVAL = DNSServiceBrowserCreate( type, domain, browse_reply, 
-				  SvREFCNT_inc( handle) );
-#if MY_DEBUG
-    printf( "started browse %x on %x\n", RETVAL, self );
-#endif
-OUTPUT: RETVAL
 
 void
 xs_step_for( time, ... )

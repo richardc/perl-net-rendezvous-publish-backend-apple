@@ -1,5 +1,5 @@
 #!perl -w
 use strict;
-our $class = "Net::ZeroConf::Backend::Rendezvous";
+our $class = "Net::Rendezvous::Publish::Backend::Apple";
 
-require 't/core.pl';
+require 't/backend_core.pl';

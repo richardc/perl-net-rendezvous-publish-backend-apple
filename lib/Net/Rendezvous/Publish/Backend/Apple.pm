@@ -1,7 +1,7 @@
 use strict;
-package Net::ZeroConf::Backend::Rendezvous;
+package Net::Rendezvous::Publish::Backend::Apple;
 use XSLoader;
-use base qw( Net::ZeroConf::Backend Class::Accessor::Lvalue::Fast );
+use base qw( Net::Rendezvous::Publish::Backend Class::Accessor::Lvalue::Fast );
 __PACKAGE__->mk_accessors(qw( _handles ));
 our $VERSION = 0.01;
 
@@ -35,17 +35,6 @@ sub publish_stop {
     xs_stop( $id );
     delete $self->_handles->{ $id };
 }
-
-sub browse {
-    my $self = shift;
-    my %args = @_;
-    return $self->_newhandle( xs_browse( map {
-        $_ || ''
-    } @args{ qw( object type domain ) } ));
-}
-
-# under the apple api, stopping a browser is exactly like stopping a publish
-*browse_stop = \&publish_stop;
 
 sub step {
     my $self = shift;

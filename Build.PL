@@ -2,13 +2,13 @@ use strict;
 use Module::Build;
 
 Module::Build->new(
-    module_name => "Net::ZeroConf::Backend::Rendezvous",
+    module_name => "Net::Rendezvous::Publish::Backend::Apple",
     license     => 'perl',
     build_requires => {
         'Test::More' => 0,
     },
     requires => {
-        "Net::ZeroConf" => 0,
+        "Net::Rendezvous::Publish" => 0,
     },
     create_makefile_pl => 'passthrough',
    )
