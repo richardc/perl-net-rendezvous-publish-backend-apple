@@ -60,7 +60,16 @@ order to allow service publishing on OS X machines.
 
 Richard Clamp <richardc@unixbeard.net>
 
+=head1 COPYRIGHT
+
+Copyright 2004, Richard Clamp.  All Rights Reserved.
+
+This program is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
 =head1 SEE ALSO
+
+Net::Rendezvous::Publish - the module this module supports
 
 L<ADC's documentation of the DNS Service Discovery
 API|http://developer.apple.com/documentation/Networking/Conceptual/dns_discovery_api/index.html>
