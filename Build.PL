@@ -9,6 +9,7 @@ Module::Build->new(
     },
     requires => {
         "Net::Rendezvous::Publish" => 0,
+        'Class::Accessor::Lvalue'  => 0,
     },
     create_makefile_pl => 'passthrough',
    )
