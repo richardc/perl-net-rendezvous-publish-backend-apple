@@ -1,7 +1,7 @@
 use strict;
 package Net::Rendezvous::Publish::Backend::Apple;
 use XSLoader;
-use base qw( Net::Rendezvous::Publish::Backend Class::Accessor::Lvalue::Fast );
+use base qw( Class::Accessor::Lvalue::Fast );
 __PACKAGE__->mk_accessors(qw( _handles ));
 our $VERSION = 0.01;
 
@@ -44,3 +44,23 @@ sub step {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Net::Rendezvous::Publish::Backend::Apple - interface to Apple's mDNS routines
+
+=head1 DESCRIPTION
+
+This module interfaces to the Apple's Rendezvous implementation in
+order to allow service publishing on OS X machines.
+
+=head1 AUTHOR
+
+Richard Clamp <richardc@unixbeard.net>
+
+=head1 SEE ALSO
+
+L<ADC's documentation of the DNS Service Discovery
+API|http://developer.apple.com/documentation/Networking/Conceptual/dns_discovery_api/index.html>
