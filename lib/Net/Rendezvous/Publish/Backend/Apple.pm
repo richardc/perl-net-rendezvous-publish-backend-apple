@@ -3,7 +3,7 @@ package Net::Rendezvous::Publish::Backend::Apple;
 use XSLoader;
 use base qw( Class::Accessor::Lvalue::Fast );
 __PACKAGE__->mk_accessors(qw( _handles ));
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 XSLoader::load __PACKAGE__;
 
