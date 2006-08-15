@@ -96,7 +96,7 @@ char *domain;
 int port;
 char *txt;
 CODE:
-    RETVAL = DNSServiceRegistrationCreate( name, type, domain, port, txt, 
+    RETVAL = DNSServiceRegistrationCreate( name, type, domain, htons(port), txt, 
 	                                   register_callback, 
 					   SvREFCNT_inc( handle ) );
 #if MY_DEBUG
